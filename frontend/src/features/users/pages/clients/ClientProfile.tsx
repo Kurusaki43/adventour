@@ -43,8 +43,8 @@ const ClientProfile = () => {
       toast.error(getErrorMessage(error));
     },
   });
-  const onSubmit = async (data: UpdateUserData) => await updateProfileFn(data);
-
+  const onSubmit = async (data: UpdateUserData) => updateProfileFn(data);
+  console.log("Uer avatart from profile :", user?.avatar);
   return (
     <DashboardCard title="Guide Profile" className="gap-2 w-full">
       <CustomForm
@@ -53,6 +53,7 @@ const ClientProfile = () => {
         onSubmit={onSubmit}
       >
         <RHFInput control={form.control} name="name" label="Name" />
+        <RHFInput control={form.control} name="phone" label="Phone" />
         <RHFInput control={form.control} name="email" label="Email" disabled />
         <RHFFileInput
           control={form.control}

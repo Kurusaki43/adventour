@@ -38,7 +38,11 @@ const UserRow = ({ user, index }: UserRowProps) => {
       <TableCell className="font-medium text-accent-foreground">
         <div className="flex items-center gap-4">
           <img
-            src={`/uploads/users/${user.avatar}`}
+            src={
+              user?.avatar?.startsWith("http")
+                ? user?.avatar
+                : `/uploads/users/${user?.avatar}`
+            }
             className="size-10 rounded-full shrink-0 object-cover shadow-lg"
             alt={user.name}
           />

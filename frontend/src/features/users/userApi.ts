@@ -57,6 +57,7 @@ export const updateProfile = async (data: Partial<GuideProfileData>) => {
   // normal text fields
   formData.append("bio", data.bio!);
   if (data.address) formData.append("address", data.address);
+  if (data.name) formData.append("name", data.name);
   if (data.phone) formData.append("phone", data.phone);
   formData.append("yearsOfExperience", String(data.yearsOfExperience));
   if (data.languagesSpoken)

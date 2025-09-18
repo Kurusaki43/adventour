@@ -7,7 +7,11 @@ const UpComingTourCard = ({ tours }: { tours: Partial<Tour>[] | Tour[] }) => {
   return (
     <DashboardCard title={`Upcoming Tours`} className="gap-1 relative">
       <ul className="divide-y overflow-auto">
-        {tours.length === 0 && <p>No tours assigned to you yet</p>}
+        {tours.length === 0 && (
+          <p className="text-muted-foreground text-sm">
+            You have no bookings yet.
+          </p>
+        )}
         {tours.length > 0 &&
           tours.map((tour) => (
             <li className="flex items-center justify-between gap-4">

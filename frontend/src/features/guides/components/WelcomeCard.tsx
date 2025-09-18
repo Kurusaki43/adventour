@@ -16,7 +16,11 @@ const WelcomeCard = ({
           {user?.guideProfile?.bio || content}
         </p>
         <img
-          src={`/uploads/users/${user?.avatar}`}
+          src={
+            user?.avatar?.startsWith("http")
+              ? user?.avatar
+              : `/uploads/users/${user?.avatar}`
+          }
           className="size-16 rounded-full bg-gray-200"
         />
       </div>
@@ -25,10 +29,12 @@ const WelcomeCard = ({
           <span className="w-fit inline-block"> Email:</span>
           <Badge className="font-semibold ml-2">{user?.email}</Badge>
         </div>
-        <div className="text-sm">
-          <span className="w-fit inline-block"> Phone:</span>
-          <Badge className="font-semibold ml-2">{user?.phone}</Badge>
-        </div>
+        {user?.phone && (
+          <div className="text-sm">
+            <span className="w-fit inline-block"> Phone:</span>
+            <Badge className="font-semibold ml-2">{user.phone}</Badge>
+          </div>
+        )}
         {user?.role !== "client" && (
           <>
             <div className="text-sm">

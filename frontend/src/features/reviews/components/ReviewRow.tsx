@@ -28,7 +28,11 @@ const ReviewRow = ({ review, index }: ReviewRowProps) => {
       <TableCell className="font-medium text-accent-foreground">
         <div className="flex items-center gap-3">
           <img
-            src={`/uploads/tours/${review.tour.imageCover}`}
+            src={
+              review.tour.imageCover?.startsWith("http")
+                ? review.tour.imageCover
+                : `/uploads/users/${review.tour.imageCover}`
+            }
             className="size-12 rounded-md shrink-0 object-cover shadow-lg"
             alt={review.tour.name}
           />

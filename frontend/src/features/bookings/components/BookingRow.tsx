@@ -63,7 +63,11 @@ const BookingRow = ({ booking, index }: BookingRowProps) => {
       <TableCell className="text-center text-accent-foreground/70">
         <div className="flex items-center gap-4">
           <img
-            src={`/uploads/users/${booking.user.avatar}`}
+            src={
+              booking.user.avatar?.startsWith("http")
+                ? booking.user.avatar
+                : `/uploads/users/${booking.user.avatar}`
+            }
             className="size-10 rounded-full shrink-0 object-cover shadow-lg"
             alt={booking.user.name}
           />

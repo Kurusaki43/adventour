@@ -14,6 +14,7 @@ const baseUserSchema = z.object({
   avatar: z.union([z.string(), imageSchema]).optional(),
   isVerified: z.boolean().optional(),
   isActive: z.boolean().optional(),
+  phone: z.string().optional(),
 });
 
 export const createUserSchema = baseUserSchema.refine(

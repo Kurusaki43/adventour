@@ -157,28 +157,31 @@ const RHFFileInput = <T extends FieldValues>({
               {/* Show existing images if no new previews */}
               {previews.length === 0 && existing.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {existing.map((name, i) => (
-                    <div key={i} className="relative">
-                      <img
-                        src={
-                          name.startsWith("http")
-                            ? name
-                            : `${imagesPath}/${name}`
-                        }
-                        alt={name}
-                        className="size-20 rounded border object-cover"
-                      />
-                      {onRemoveExistingImage && (
-                        <button
-                          type="button"
-                          className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
-                          onClick={() => onRemoveExistingImage(name)}
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
-                  ))}
+                  {existing.map((name, i) => {
+                    console.log("Avatar", name);
+                    return (
+                      <div key={i} className="relative">
+                        <img
+                          src={
+                            /^https?:\/\//i.test(name)
+                              ? name
+                              : `${imagesPath}/${name}`
+                          }
+                          alt={name}
+                          className="size-20 rounded border object-cover"
+                        />
+                        {onRemoveExistingImage && (
+                          <button
+                            type="button"
+                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1"
+                            onClick={() => onRemoveExistingImage(name)}
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>

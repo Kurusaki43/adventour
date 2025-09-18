@@ -199,14 +199,12 @@ export const updateMe = catchAsync(async (req, res, next) => {
 export const getAvailableGuides = catchAsync(async (req, res, next) => {
   const { startDates, tourDuration, tourDurationUnit } = req.body
 
-  // ✅ Validate startDates
   if (!Array.isArray(startDates) || startDates.length === 0) {
     return next(
       new AppError('Start dates are required', HttpStatusCode.BAD_REQUEST)
     )
   }
 
-  // ✅ Validate tourDuration
   const parsedDuration = Number(tourDuration)
   if (isNaN(parsedDuration) || parsedDuration <= 0) {
     return next(
@@ -214,10 +212,8 @@ export const getAvailableGuides = catchAsync(async (req, res, next) => {
     )
   }
 
-  // ✅ Parse dates
   const parsedDates = startDates.map((d) => parseISO(d))
 
-  // ✅ Get all guides with profiles
   const users = (await User.find({
     role: { $in: ['guide', 'lead-guide'] },
     isActive: { $eq: true }
@@ -255,11 +251,9 @@ export const getAvailableGuides = catchAsync(async (req, res, next) => {
     )
     if (hasConflict) continue
 
-    // ✅ Passed both checks
     availableGuides.push(user)
   }
 
-  // ✅ Final response
   res.status(200).json({
     status: 'success',
     results: availableGuides.length,
