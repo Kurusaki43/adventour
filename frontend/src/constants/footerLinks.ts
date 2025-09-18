@@ -24,7 +24,7 @@ export const FOOTER_LINKS = {
     },
     {
       label: "Privacy & Policy",
-      href: "/about",
+      href: "/privacy",
     },
     {
       label: "Contact Channels",
@@ -32,7 +32,7 @@ export const FOOTER_LINKS = {
     },
     {
       label: "FAQ",
-      href: "/about",
+      href: "/faq",
     },
   ],
 };

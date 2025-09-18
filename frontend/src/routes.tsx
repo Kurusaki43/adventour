@@ -71,7 +71,10 @@ const ClientProfile = lazy(
 const GuideDetailPage = lazy(
   () => import("@/features/guides/pages/GuideDetailPage")
 );
-
+const PrivacyPolicyPage = lazy(
+  () => import("@/features/home/pages/PrivacyAndPolicyPage")
+);
+const FaqPage = lazy(() => import("@/features/home/pages/FaqPage"));
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -83,6 +86,8 @@ export const router = createBrowserRouter([
       { path: "guides/:id", element: Loadable(GuideDetailPage) },
       { path: "about", element: Loadable(AboutPage) },
       { path: "contact", element: Loadable(ContactPage) },
+      { path: "privacy", element: Loadable(PrivacyPolicyPage) },
+      { path: "faq", element: Loadable(FaqPage) },
     ],
   },
   {

@@ -9,6 +9,7 @@ const MainLayout = () => {
   useResetTheme();
   return (
     <div>
+      <ScrollToTop />
       <TopBar />
       <Header />
       <ScrollToTop />

@@ -10,8 +10,8 @@ const GuidesPage = () => {
   const { data, isPending } = useGuides({ ...filter, limit });
   const guides = data?.data.users;
   return (
-    <div>
-      <section className="-mt-[149px] bg-[url(/images/hero-1-bg.jpg)] bg-cover bg-bottom relative">
+    <>
+      <section className="-mt-[149px] bg-[url(/images/hero-0-bg.jpg)] bg-cover bg-center relative">
         <div className="absolute inset-0 bg-gradient-to-b from-black  to-[#334155] opacity-40" />
         <div className="container mx-auto relative z-10 grid place-content-center gap-8 px-2 min-h-[350px]">
           <div className="flex flex-col gap-4 items-center justify-center text-center ">
@@ -46,7 +46,7 @@ const GuidesPage = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

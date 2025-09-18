@@ -16,7 +16,7 @@ const HeroSearchBar = () => {
   if (date) url.set("date", date);
 
   return (
-    <div className="flex flex-col md:flex-row md:items-end md:[&>*:not(:last-child)]:flex-1 gap-6 md:gap-4 bg-white py-6 px-10 rounded-full max-w-sm mx-auto w-full md:max-w-full">
+    <div className="flex flex-col md:flex-row md:items-end md:[&>*:not(:last-child)]:flex-1 gap-6 md:gap-4 bg-white py-6 px-10 rounded-xl md:rounded-full max-w-sm mx-auto w-full md:max-w-full">
       <SearchFilter placeholder="Search by location" />
       <DateFilter />
       <Filter
