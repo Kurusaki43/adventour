@@ -20,6 +20,7 @@ export interface IUser extends Document {
   avatar?: string
   phone?: string
   guideProfile?: Types.ObjectId | IGuideProfile
+  provider?: string
   createdAt?: Date
   updatedAt?: string
   comparePassword: (condidatePass: string) => Promise<boolean>

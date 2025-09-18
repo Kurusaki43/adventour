@@ -7,9 +7,11 @@ import {
   resetPasswordHandler,
   logoutHandler,
   refreshTokenHandler,
-  meHandler
+  meHandler,
+  oauthHandler
 } from '@controllers/auth.controller'
 import { protect } from '@middlewares/auth.middleware'
+import passport from 'passport'
 
 export const authRouter = Router()
 
@@ -22,5 +24,15 @@ authRouter.patch('/reset-password/:code', resetPasswordHandler)
 authRouter.get('/refresh', refreshTokenHandler)
 authRouter.get('/logout', logoutHandler)
 
+// Oauth
+authRouter.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+)
+authRouter.get(
+  '/google/callback',
+  passport.authenticate('google', { session: false }),
+  oauthHandler
+)
 // Protected routes
 authRouter.get('/me', protect, meHandler)

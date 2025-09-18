@@ -62,6 +62,7 @@ const LoginForm = () => {
         type="password"
         className="glassy-input"
         placeholder="Password"
+        autoComplete="true"
         icon={FaLock}
       />
       <div className="flex items-center justify-between text-sm text-white">

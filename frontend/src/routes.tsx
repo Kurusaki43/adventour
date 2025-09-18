@@ -12,6 +12,7 @@ import UserDashboardLayout from "@/layout/UserDashboardLayout";
 import { MultiStepProvider } from "@/features/tours/context/multiStepForm";
 import { ROLES } from "@/features/users/types/user.types";
 import { Loadable } from "./components/common/Loadable";
+import AuthCallback from "@/features/auth/components/AuthCallback";
 
 // --- Lazy-loaded Pages ---
 const HomePage = lazy(() => import("@/features/home/pages/HomePage"));
@@ -92,6 +93,7 @@ export const router = createBrowserRouter([
       { path: "verify-email/:token", element: Loadable(EmailVerification) },
       { path: "forgot-password", element: Loadable(ForgotPassword) },
       { path: "reset-password/:token", element: Loadable(ResetPassword) },
+      { path: "auth/callback", element: <AuthCallback /> },
     ],
   },
   {

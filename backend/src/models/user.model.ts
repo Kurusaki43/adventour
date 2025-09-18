@@ -22,7 +22,6 @@ const userSchema = new Schema<IUser>(
     },
     password: {
       type: String,
-      required: [true, 'User should have a password'],
       maxlength: [25, 'Password should be at most 25 characters'],
       minlength: [8, 'Password should be at least 8 characters']
     },
@@ -48,7 +47,8 @@ const userSchema = new Schema<IUser>(
     guideProfile: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'GuideProfile'
-    }
+    },
+    provider: String
   },
   {
     timestamps: true,

@@ -18,7 +18,7 @@ import { HttpStatusCode } from '@constants/httpsStatusCode'
 import cors from 'cors'
 import { bookingRouter } from '@routes/booking.route'
 import { paymentRouter } from '@routes/payment.route'
-
+import passport from '@config/passport'
 // Start express app
 export const app = express()
 export const mailer = new Mailer(env.SENDGRID_FROM_EMAIL)
@@ -71,6 +71,7 @@ app.use(
     credentials: true
   })
 )
+app.use(passport.initialize())
 
 // Mount routers
 app.use('/api/v1/auth', authRouter)

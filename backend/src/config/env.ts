@@ -34,5 +34,7 @@ export const env = cleanEnv(process.env, {
   MAIL_TRAP_USER: str(),
   MAIL_TRAP_PASSWORD: str(),
   SENDGRID_API_KEY: str(),
-  SENDGRID_FROM_EMAIL: str()
+  SENDGRID_FROM_EMAIL: str(),
+  GOOGLE_CLIENT_ID: str(),
+  GOOGLE_CLIENT_SECRET: str()
 })

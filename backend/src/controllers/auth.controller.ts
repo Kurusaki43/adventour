@@ -1,4 +1,6 @@
+import { env } from '@config/env'
 import { HttpStatusCode } from '@constants/httpsStatusCode'
+import { Session } from '@models/session.model'
 import {
   createUser,
   forgotPassword,
@@ -11,13 +13,20 @@ import {
 import { AppError } from '@utils/appError'
 import { catchAsync } from '@utils/catchAsync'
 import { clearAuthCookies, setAuthCookies } from '@utils/cookies'
-import { extractDeviceInfo, pickFields } from '@utils/helper'
+import {
+  extractDeviceInfo,
+  generateRefreshToken,
+  pickFields,
+  refreshTokenExpiry
+} from '@utils/helper'
+import { signToken } from '@utils/jwt'
 import {
   forgotPasswordSchema,
   loginSchema,
   registerSchema,
   resetPasswordSchema
 } from '@validations/user.validation'
+import { randomUUID } from 'crypto'
 
 export const registerHandler = catchAsync(async (req, res) => {
   // 1- Handle Validation
@@ -139,9 +148,39 @@ export const refreshTokenHandler = catchAsync(async (req, res) => {
 })
 
 export const meHandler = catchAsync(async (req, res) => {
-  // The user is already authenticated by the auth middleware
-  // Just return the user information
   res.status(HttpStatusCode.OK).json({
-    user: req.user
+    user: pickFields(req.user!, [
+      'id',
+      'name',
+      'email',
+      'role',
+      'avatar',
+      'phone',
+      'isVerified',
+      'isActive',
+      'createdAt',
+      'guideProfile'
+    ])
   })
+})
+
+export const oauthHandler = catchAsync(async (req, res) => {
+  const user = req.user
+  const deviceInfo = extractDeviceInfo(req)
+  // 4- Create session id & Sign JWT
+  const sessionId = randomUUID()
+  const refreshToken = generateRefreshToken()
+  // 5- Create session
+  await Session.create({
+    userId: user!.id,
+    sessionId,
+    refreshToken,
+    deviceInfo,
+    expiresAt: refreshTokenExpiry(env.REFRESH_TOKEN_EXPIRES_IN)
+  })
+  const accessToken = signToken({ userId: user!._id, sessionId })
+
+  setAuthCookies(res, refreshToken).redirect(
+    `${env.FRONT_END_HOST_URL}/auth/callback?accessToken=${accessToken}`
+  )
 })

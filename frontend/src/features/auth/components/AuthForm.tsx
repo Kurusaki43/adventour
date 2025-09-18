@@ -4,6 +4,8 @@ import Notification from "@/components/Notification";
 import LoadingButton from "@/components/LoadingButton";
 import CustomForm from "@/components/common/Form";
 import Logo from "@/components/Logo";
+import { Button } from "@/components/ui/button";
+import { BsGoogle } from "react-icons/bs";
 
 type AuthFormProps<T extends FieldValues> = {
   title: "Sign Up" | "Log In" | (string & {});
@@ -44,6 +46,20 @@ const AuthForm = <T extends FieldValues>({
         <LoadingButton loading={loading} className="mt-2 w-full glassy-btn">
           {buttonLabel}
         </LoadingButton>
+      </div>
+      <div className="flex justify-center">
+        {title === "Log In" && (
+          <Button
+            variant={"ghost"}
+            className="mt-4"
+            type="button"
+            onClick={() =>
+              window.open("http://localhost:3000/api/v1/auth/google", "_self")
+            }
+          >
+            <BsGoogle />
+          </Button>
+        )}
       </div>
 
       {(title === "Log In" || title === "Sign Up") && (
