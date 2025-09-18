@@ -160,7 +160,11 @@ const RHFFileInput = <T extends FieldValues>({
                   {existing.map((name, i) => (
                     <div key={i} className="relative">
                       <img
-                        src={`${imagesPath}/${name}`}
+                        src={
+                          name.startsWith("http")
+                            ? name
+                            : `${imagesPath}/${name}`
+                        }
                         alt={name}
                         className="size-20 rounded border object-cover"
                       />

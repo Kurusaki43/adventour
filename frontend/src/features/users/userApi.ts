@@ -51,23 +51,25 @@ export const deleteUser = async (id: string) => {
   await axiosInstance.delete(`/users/${id}`);
 };
 
-export const updateProfile = async (data: GuideProfileData) => {
+export const updateProfile = async (data: Partial<GuideProfileData>) => {
   const formData = new FormData();
 
   // normal text fields
   formData.append("bio", data.bio!);
-  formData.append("address", data.address);
-  formData.append("phone", data.phone);
+  if (data.address) formData.append("address", data.address);
+  if (data.phone) formData.append("phone", data.phone);
   formData.append("yearsOfExperience", String(data.yearsOfExperience));
-  data.languagesSpoken.forEach((lang, i) => {
-    formData.append(`languagesSpoken[${i}]`, lang);
-  });
+  if (data.languagesSpoken)
+    data.languagesSpoken.forEach((lang, i) => {
+      formData.append(`languagesSpoken[${i}]`, lang);
+    });
 
-  data.availability.forEach((slot, index) => {
-    formData.append(`availability[${index}][day]`, slot.day);
-    formData.append(`availability[${index}][from]`, slot.from);
-    formData.append(`availability[${index}][to]`, slot.to);
-  });
+  if (data.availability)
+    data.availability.forEach((slot, index) => {
+      formData.append(`availability[${index}][day]`, slot.day);
+      formData.append(`availability[${index}][from]`, slot.from);
+      formData.append(`availability[${index}][to]`, slot.to);
+    });
 
   // ✅ File fields
   if (data.avatar) formData.append("avatar", data.avatar);

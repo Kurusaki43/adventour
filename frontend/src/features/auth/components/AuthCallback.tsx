@@ -22,7 +22,7 @@ function AuthCallback() {
           headers: { Authorization: `Bearer ${accessToken}` },
           credentials: "include", // in case your API uses cookies too
         });
-        console.log(res);
+
         if (!res.ok) {
           throw new Error("Failed to fetch user");
         }

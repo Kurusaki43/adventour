@@ -180,7 +180,7 @@ export const oauthHandler = catchAsync(async (req, res) => {
   })
   const accessToken = signToken({ userId: user!._id, sessionId })
 
-  setAuthCookies(res, refreshToken).redirect(
+  setAuthCookies(res, refreshToken, sessionId).redirect(
     `${env.FRONT_END_HOST_URL}/auth/callback?accessToken=${accessToken}`
   )
 })
