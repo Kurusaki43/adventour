@@ -5,3 +5,5 @@ import Router from 'express'
 export const paymentRouter = Router()
 
 paymentRouter.route('/').get(protect, getAllPayments)
+
+paymentRouter.post('/create-stripe-session', () => {})
