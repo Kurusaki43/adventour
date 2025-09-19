@@ -5,7 +5,6 @@ import LoadingButton from "@/components/LoadingButton";
 import CustomForm from "@/components/common/Form";
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
-import { BsGoogle } from "react-icons/bs";
 
 type AuthFormProps<T extends FieldValues> = {
   title: "Sign Up" | "Log In" | (string & {});
@@ -50,14 +49,13 @@ const AuthForm = <T extends FieldValues>({
       <div className="flex justify-center">
         {title === "Log In" && (
           <Button
-            variant={"ghost"}
-            className="mt-4"
+            className="mt-4 bg-white rounded-full size-8 hover:bg-white hover:scale-105 duration-300 p-0"
             type="button"
             onClick={() =>
               window.open("http://localhost:3000/api/v1/auth/google", "_self")
             }
           >
-            <BsGoogle />
+            <img className="size-6" src="/google.png" />
           </Button>
         )}
       </div>

@@ -41,7 +41,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section>
+    <section className="border-b">
       <div className="main-container">
         <h2 className="section-title">Customer Review</h2>
         <Carousel

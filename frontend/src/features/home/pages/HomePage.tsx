@@ -1,3 +1,4 @@
+import Faq from "../components/Faq";
 import AboutUs from "../sections/aboutUs/AboutUs";
 import Hero from "../sections/hero/Hero";
 import PopularTours from "../sections/popularTours/PopularTours";
@@ -12,6 +13,7 @@ const HomePage = () => {
       <WhyChooseUs />
       <AboutUs />
       <Testimonials />
+      <Faq />
     </>
   );
 };

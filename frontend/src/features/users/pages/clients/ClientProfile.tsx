@@ -44,7 +44,7 @@ const ClientProfile = () => {
     },
   });
   const onSubmit = async (data: UpdateUserData) => updateProfileFn(data);
-  console.log("Uer avatart from profile :", user?.avatar);
+
   return (
     <DashboardCard title="Guide Profile" className="gap-2 w-full">
       <CustomForm

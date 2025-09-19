@@ -69,7 +69,7 @@ const LoginForm = () => {
         <div className="flex items-center gap-3">
           <Checkbox
             id="terms"
-            checked={true}
+            checked={false}
             // onCheckedChange={(checked) => setPersist(!!checked)}
             className="data-[state=checked]:bg-lime-200 data-[state=checked]:text-black"
           />

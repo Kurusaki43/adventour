@@ -9,7 +9,7 @@ const GuideAssignedToursList = () => {
   const { id } = useParams();
   const { data, isPending, isError, error } = useGuideTours(id!);
   const width = useWindowWidth();
-  console.log(width);
+
   return (
     <div className="flex flex-col gap-2">
       {isPending && <TourCardSkeleton />}

@@ -51,7 +51,7 @@ const BookingForm = ({ mode, editedBooking }: BookingFormProps) => {
 
   const handleSubmit = (data: CreateBookingData | UpdateBookingData) =>
     createUpdateBooking(data);
-  console.log(tours?.data.tours);
+
   return (
     <CustomForm
       form={form}

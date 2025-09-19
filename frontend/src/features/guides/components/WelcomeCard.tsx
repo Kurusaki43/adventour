@@ -8,7 +8,7 @@ const WelcomeCard = ({
   content?: string;
 }) => {
   const user = useAuthUser();
-  console.log(user?.guideProfile?.bio);
+
   return (
     <DashboardCard title={`Hello, ${user?.name}`} className="gap-0 self-start">
       <div className="flex items-center justify-between mb-4">

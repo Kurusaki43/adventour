@@ -26,7 +26,6 @@ export const getPayments = async (options: PaymentQueryOptions = {}) => {
   params.set("limit", `${limit}`);
 
   const queryString = params.toString();
-  console.log(queryString);
   const response = await axiosInstance.get<ResponseSuccess>(
     `/payments?${queryString}`
   );
