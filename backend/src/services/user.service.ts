@@ -62,21 +62,31 @@ export const login = async (
   const user = await User.findOne({ email }).populate('guideProfile')
   if (!user)
     throw new AppError('Invalid credentials', HttpStatusCode.UNAUTHORIZED)
-  // 2- Check if password is correct
+
+  // 2- Check provider
+  if (user.provider === 'google') {
+    throw new AppError(
+      'Please logged in using gmail',
+      HttpStatusCode.UNAUTHORIZED
+    )
+  }
+
+  // 3- Check if password is correct
   const isPasswordCorrect = await user.comparePassword(password)
   if (!isPasswordCorrect)
     throw new AppError('Invalid credentials', HttpStatusCode.UNAUTHORIZED)
-  // 3- Check if user is verified
+  // 4- Check if user is verified
+
   if (!user.isVerified)
     throw new AppError(
       'Check your email box to verify your account',
       HttpStatusCode.FORBIDDEN
     )
-  // 4- Create session id & Sign JWT
+  // 5- Create session id & Sign JWT
   const sessionId = uuidv4()
   const accessToken = signToken({ userId: user._id, sessionId })
   const refreshToken = generateRefreshToken()
-  // 5- Create session
+  // 6- Create session
   await Session.create({
     userId: user._id,
     sessionId,

@@ -42,8 +42,10 @@ export const registerHandler = catchAsync(async (req, res) => {
 export const loginHandler = catchAsync(async (req, res) => {
   // 1- Handle validation
   const parsedBody = loginSchema.parse(req.body)
+
   // 2- Get  device info
   const deviceInfo = extractDeviceInfo(req)
+
   // 3- Call login service
   const { accessToken, refreshToken, sessionId, user } = await login(
     parsedBody,

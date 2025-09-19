@@ -37,7 +37,6 @@ export const aliasTopTours = (
   const sort = `sort=-ratingsAverage,price`
   let url = req.originalUrl.split('/').slice(0, -1).join('/')
   url = [url, '?', limit, '&', sort].join('')
-  console.log(url)
   req.originalUrl = url
   next()
 }

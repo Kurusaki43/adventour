@@ -20,13 +20,11 @@ export const protect: RequestHandler = async (req, res, next) => {
       'User not found or not verified',
       HttpStatusCode.UNAUTHORIZED
     )
-  console.log(user)
   const session = await Session.findOne({
     sessionId: payload.sessionId,
     userId: user.id,
     isActive: true
   })
-  console.log(session)
   if (!session)
     throw new AppError(
       'Session is invalid or expired',

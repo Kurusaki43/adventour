@@ -30,7 +30,6 @@ export const addCurrentUserIdToQueryParams: RequestHandler = (
   res,
   next
 ) => {
-  console.log('Entered ')
   req.params.id = req.user?.id
   next()
 }
