@@ -44,7 +44,8 @@ export const mutateBooking = async (
   const isUpdate = "id" in data;
   const url = isUpdate ? `/bookings/${data.id}` : `/bookings`;
   const method = isUpdate ? axiosInstance.patch : axiosInstance.post;
-  await method(url, data);
+  const res = await method(url, data);
+  return res.data;
 };
 
 export const getBookingStats = async (year?: number | string) => {

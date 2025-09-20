@@ -40,7 +40,7 @@ const ClientBookingForm = ({ tour }: { tour: Tour | PopulatedTour }) => {
     isError,
   } = useMutation({
     mutationFn: mutateBooking,
-    onSuccess: () => {
+    onSuccess: (data, { method }) => {
       form.reset({
         tour: tour.id,
         user: user?.id,
@@ -50,6 +50,10 @@ const ClientBookingForm = ({ tour }: { tour: Tour | PopulatedTour }) => {
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
       queryClient.invalidateQueries({ queryKey: ["payments"] });
       queryClient.invalidateQueries({ queryKey: ["tours"] });
+
+      if (method === "stripe") {
+        window.location.href = data.url;
+      }
     },
   });
 

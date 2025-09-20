@@ -1,9 +1,10 @@
 import Notification from "@/components/Notification";
 import Spinner from "@/components/Spinner";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuthError, useAuthLoading, useVerifyEmail } from "../store/useAuth";
 import logo from "@/assets/logo-white.png";
+import { Button } from "@/components/ui/button";
 
 const EmailVerificationCard = () => {
   const [time, setTime] = useState(5);
@@ -67,7 +68,26 @@ const EmailVerificationCard = () => {
           </p>
         </>
       )}
-      {!loading && error && <Notification type="Fail" message={error} />}
+      {!loading &&
+        error &&
+        error !== "Invalid or expired verification code." && (
+          <div className="flex flex-col items-center">
+            <Notification type="Fail" message={error} className="mt-4" />
+            <Link to="/signup" className="mt-4 underline">
+              Register again
+            </Link>
+          </div>
+        )}
+      {!loading &&
+        error &&
+        error === "Invalid or expired verification code." && (
+          <div className="flex flex-col items-center">
+            <Notification type="Fail" message={error} className="mt-4" />
+            <Button className="bg-white mt-4 text-black hover:bg-white hover:scale-105 duration-300">
+              Resend code again
+            </Button>
+          </div>
+        )}
     </div>
   );
 };

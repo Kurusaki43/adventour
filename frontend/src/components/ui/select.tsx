@@ -66,7 +66,6 @@ function SelectContent({
         )}
         position={position}
         {...props}
-        disableOutsideScroll
       >
         <SelectScrollUpButton />
         <SelectPrimitive.Viewport
