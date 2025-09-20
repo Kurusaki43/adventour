@@ -16,11 +16,13 @@ import {
 
 const Status: Record<BookingStatus, string> = {
   pending:
-    "bg-yellow-100 text-yellow-700 dark:bg-yellow-600 dark:text-yellow-100",
-  cancelled: "bg-red-100 text-red-700 dark:bg-red-600 dark:text-red-100",
+    "bg-yellow-100 text-yellow-700 dark:bg-yellow-600 dark:text-yellow-100 transition-colors duration-300 ease-in-out",
+  cancelled:
+    "bg-red-100 text-red-700 dark:bg-red-600 dark:text-red-100 transition-colors duration-300 ease-in-out",
   confirmed:
-    "bg-green-100 text-green-700 dark:bg-green-600 dark:text-green-100",
-  completed: "bg-blue-100 text-blue-700 dark:bg-blue-600 dark:text-blue-100",
+    "bg-green-100 text-green-700 dark:bg-green-600 dark:text-green-100 transition-colors duration-300 ease-in-out",
+  completed:
+    "bg-blue-100 text-blue-700 dark:bg-blue-600 dark:text-blue-100 transition-colors duration-300 ease-in-out",
 };
 
 const LastBookingsCard = () => {

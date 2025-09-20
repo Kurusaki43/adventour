@@ -21,6 +21,7 @@ const Status: Record<PaymentStatus, string> = {
     "bg-yellow-100 text-yellow-700 dark:bg-yellow-600 dark:text-yellow-100",
   failed: "bg-red-100 text-red-700 dark:bg-red-600 dark:text-red-100",
   paid: "bg-green-100 text-green-700 dark:bg-green-600 dark:text-green-100",
+  refunded: "bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-100",
 };
 
 type PaymentRowProps = {

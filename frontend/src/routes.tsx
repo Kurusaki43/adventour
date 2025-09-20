@@ -13,6 +13,8 @@ import { MultiStepProvider } from "@/features/tours/context/multiStepForm";
 import { ROLES } from "@/features/users/types/user.types";
 import { Loadable } from "./components/common/Loadable";
 import AuthCallback from "@/features/auth/components/AuthCallback";
+import PaymentSuccess from "./features/bookings/pages/PaymentSuccess";
+import PaymentFailed from "./features/bookings/pages/PaymentFailed";
 
 // --- Lazy-loaded Pages ---
 const HomePage = lazy(() => import("@/features/home/pages/HomePage"));
@@ -88,6 +90,8 @@ export const router = createBrowserRouter([
       { path: "contact", element: Loadable(ContactPage) },
       { path: "privacy", element: Loadable(PrivacyPolicyPage) },
       { path: "faq", element: Loadable(FaqPage) },
+      { path: "payment-success", element: <PaymentSuccess /> },
+      { path: "payment-cancel", element: <PaymentFailed /> },
     ],
   },
   {
