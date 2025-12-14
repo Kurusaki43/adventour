@@ -1,3 +1,4 @@
+import { env } from '@config/env'
 import { HttpStatusCode } from '@constants/httpsStatusCode'
 import { IPayment } from '@interfaces/payment.interface'
 import { Booking } from '@models/booking.model'
@@ -10,6 +11,7 @@ import { catchAsync } from '@utils/catchAsync'
 import { Types } from 'mongoose'
 import path from 'path'
 import QueryString from 'qs'
+import Stripe from 'stripe'
 
 export const getAllBookings = catchAsync(async (req, res) => {
   const parsedQuery = QueryString.parse(req.originalUrl.split('?')[1] || '')
@@ -45,6 +47,7 @@ export const getAllBookings = catchAsync(async (req, res) => {
   })
 })
 
+const stripe = new Stripe(env.STRIPE_SECRET_KEY)
 export const createBooking = catchAsync(async (req, res, next) => {
   const {
     tour: tourId,
@@ -162,7 +165,29 @@ export const createBooking = catchAsync(async (req, res, next) => {
     amount: price,
     status: 'pending'
   })
-
+  // 10. Stripe flow → create checkout session
+  if (paymentMethod === 'stripe') {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'dzd',
+            product_data: { name: `Tour Booking - ${tour.name}` },
+            unit_amount: price * 100
+          },
+          quantity: 1
+        }
+      ],
+      mode: 'payment',
+      success_url: `${env.FRONT_END_HOST_URL}/payment-success?paymentId=${payment._id}`,
+      cancel_url: `${env.FRONT_END_HOST_URL}/payment-cancel?paymentId=${payment._id}`
+    })
+    // Update payment with Stripe sessionId
+    payment.stripeSessionId = session.id
+    await payment.save()
+    return res.status(HttpStatusCode.CREATED).json({ url: session.url })
+  }
   res.status(HttpStatusCode.CREATED).json({
     status: 'success',
     data: {
@@ -175,7 +200,7 @@ export const createBooking = catchAsync(async (req, res, next) => {
 export const updateBooking = catchAsync(async (req, res, next) => {
   const bookingId = req.params.id
   const { peopleCount, tourStartDate, status } = req.body
-
+  console.log('body: ', req.body)
   //1. Check if booki!ng exist
   const booking = await Booking.findById(bookingId)
   if (!booking) {

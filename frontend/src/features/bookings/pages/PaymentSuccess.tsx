@@ -16,16 +16,14 @@ const PaymentSuccess = () => {
           </div>
         </div>
       </section>
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <div className=" bg-background flex items-center justify-center py-14">
         <div className="w-full max-w-md space-y-8">
           {/* Success Icon */}
-          <div className="text-center">
+          <div className="text-center bg-green-600/20 rounded-xl p-6">
             <div className="mx-auto w-16 h-16 bg-success rounded-full flex items-center justify-center mb-4">
               <CheckCircle className="w-8 h-8 text-success-foreground" />
             </div>
-            <h1 className="text-2xl font-semibold text-foreground mb-2">
-              Payment Successful
-            </h1>
+            <h1 className="text-2xl font-semibold  mb-2">Payment Successful</h1>
             <p className="text-muted-foreground text-balance">
               Your payment has been processed successfully. You should receive a
               confirmation email shortly.
@@ -73,8 +71,8 @@ const PaymentSuccess = () => {
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link to="/orders">
-                  View Orders
+                <Link to="/me">
+                  My receipt
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
               </Button>
@@ -85,7 +83,7 @@ const PaymentSuccess = () => {
           <div className="text-center text-sm text-muted-foreground">
             <p>
               Need help?{" "}
-              <Link to="/support" className="text-foreground hover:underline">
+              <Link to="/" className="text-foreground hover:underline">
                 Contact Support
               </Link>
             </p>

@@ -19,9 +19,12 @@ import cors from 'cors'
 import { bookingRouter } from '@routes/booking.route'
 import { paymentRouter } from '@routes/payment.route'
 import passport from '@config/passport'
+import { webhookRouter } from '@routes/webhook.route'
 // Start express app
 export const app = express()
 export const mailer = new Mailer(env.SENDGRID_FROM_EMAIL)
+app.use('/api/v1/webhook', webhookRouter)
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 1000, // Limit each IP to 100 requests per windowMs
