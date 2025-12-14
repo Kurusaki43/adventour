@@ -119,13 +119,14 @@ export const verifyEmail = async (rawCode: string) => {
       new: true
     }
   )
+  // 3- Delete verification code after finish
+  await verificationCode.deleteOne()
+
   if (!user)
     throw new AppError(
       'User is not exist, maybe it deleted.',
       HttpStatusCode.NOT_FOUND
     )
-  // 3- Delete verification code after finish
-  await verificationCode.deleteOne()
 }
 
 export const forgotPassword = async (email: string) => {

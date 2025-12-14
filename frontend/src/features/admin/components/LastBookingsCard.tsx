@@ -29,17 +29,17 @@ const LastBookingsCard = () => {
   const { data, isPending, isError, error } = useBookings({
     limit: 5,
   });
-  if (isPending) return <Skeleton className=" h-64" />;
+  if (isPending) return <Skeleton className="h-64" />;
   return (
     <DashboardCard
       title="Last Bookings"
-      className="md:col-span-1 lg:col-span-2 max-h-82"
+      className="md:col-span-1 lg:col-span-2 max-h-82 min-h-h-64"
     >
       {isError && (
         <DashboardMessage type="error" message={getErrorMessage(error)} />
       )}
       {!isError && data.bookings.length === 0 && (
-        <DashboardMessage type="empty" />
+        <p className="text-muted-foreground">You have no last booking yet.</p>
       )}
 
       {!isError && data.bookings.length > 0 && (

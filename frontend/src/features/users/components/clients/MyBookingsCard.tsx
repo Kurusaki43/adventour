@@ -36,7 +36,7 @@ const MyBookingsCard = () => {
   return (
     <DashboardCard
       title="My bookings"
-      className="gap-1 relative overflow-hidden"
+      className="gap-1 relative overflow-hidden max-h-[350px]"
     >
       {bookingSorted.length === 0 ? (
         <p className="text-muted-foreground text-sm">

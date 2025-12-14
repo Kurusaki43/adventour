@@ -30,7 +30,7 @@ const DashboardCard = ({
           </CardTitle>
         )}
       </CardHeader>
-      <CardContent className="p-0 flex flex-col text-gray-600 dark:text-gray-200">
+      <CardContent className="p-0 flex flex-col text-gray-600 dark:text-gray-200 min-h-64">
         {children}
       </CardContent>
     </Card>

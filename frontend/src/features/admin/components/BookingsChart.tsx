@@ -33,7 +33,7 @@ const BookingsChart = () => {
         />
       )}
       {!isError && stats.data.length === 0 && (
-        <DashboardMessage type="empty" title="No confirmed bookings yet" />
+        <p className="text-muted-foreground">You have no booking yet.</p>
       )}
       {!isError && stats.data.length > 0 && (
         <div className="min-w-[450px]">
